@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent">
+        <TextView
+            android:id="@+id/tvTitleActor"
+            style="@style/TextTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/actor"/>
+        <ImageView
+            android:id="@+id/ivActor"
+            imageUrl="@{event.actor.avatar_url}"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleActor" />
+
+        <TextView
+            android:id="@+id/tvActorId"
+            style="@style/TextContent"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:text="@{@string/generic_id(event.actor.id)}"
+            app:layout_constraintStart_toEndOf="@id/ivActor"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleActor" />
+
+        <TextView
+            android:id="@+id/tvActorName"
+            style="@style/TextContent"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:text="@{@string/generic_actor(event.actor.login)}"
+            app:layout_constraintStart_toEndOf="@id/ivActor"
+            app:layout_constraintTop_toBottomOf="@id/tvActorId" />
+
+        <TextView
+            android:id="@+id/tvActorUrl"
+            style="@style/TextContent"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:autoLink="web"
+            android:text="@{@string/generic_url(event.actor.url)}"
+            app:layout_constraintStart_toEndOf="@id/ivActor"
+            app:layout_constraintTop_toBottomOf="@id/tvActorName" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/teal_700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivActor" />
+
+        <TextView
+            android:id="@+id/tvTitleEvent"
+            style="@style/TextTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view1"
+            android:text="@string/event"/>
+
+        <LinearLayout
+            android:id="@+id/llSecondView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleEvent">
+
+            <TextView
+                style="@style/TextContent"
+                android:text="@{@string/generic_id(event.id)}" />
+
+            <TextView
+                style="@style/TextSubHeader"
+                android:text="@{@string/generic_type(event.type)}" />
+
+            <TextView
+                style="@style/TextContent"
+                android:text="@{@string/generic_created_at(event.created_at)}" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/teal_700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llSecondView" />
+
+        <TextView
+            android:id="@+id/tvRepoTitle"
+            style="@style/TextTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view2"
+            android:text="@string/repo"/>
+
+        <LinearLayout
+            android:id="@+id/llThirdView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvRepoTitle">
+
+            <TextView
+                style="@style/TextContent"
+                android:text="@{@string/generic_id(event.repo.id)}" />
+
+            <TextView
+                style="@style/TextSubHeader"
+                android:text="@{@string/generic_repo(event.repo.name)}" />
+
+            <TextView
+                style="@style/TextContent"
+                android:autoLink="web"
+                android:text="@{@string/generic_url(event.repo.url)}" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/teal_700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llThirdView" />
+
+
+        <TextView
+            android:id="@+id/tvOrgTitle"
+            style="@style/TextTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view3"
+            android:visibility="@{event.org != null ? View.VISIBLE : View.GONE}"
+            android:text="@string/org"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvOrgTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="@{event.org != null ? View.VISIBLE : View.GONE}">
+
+            <ImageView
+                android:id="@+id/ivOrg"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:visibility="@{event.org != null ? View.VISIBLE : View.GONE}"
+                imageUrl="@{event.org.avatar_url}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextContent"
+                    android:text="@{@string/generic_id(event.org.id)}" />
+
+                <TextView
+                    style="@style/TextSubHeader"
+                    android:text="@{@string/generic_org(event.org.login)}" />
+
+                <TextView
+                    style="@style/TextContent"
+                    android:autoLink="web"
+                    android:text="@{@string/generic_url(event.org.url)}" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="event"
+            type="com.eventgithubdemo.api.model.Event" />
+    </data>
+</layout>

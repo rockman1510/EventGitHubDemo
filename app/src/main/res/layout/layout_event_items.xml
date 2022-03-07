@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:elevation="6dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="6dp">
+
+        <LinearLayout
+            android:id="@+id/llRootView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> selectListener.onEventSelected(event)}"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tvId"
+                style="@style/TextHeader"
+                android:text="@{@string/generic_id(event.id)}" />
+
+            <TextView
+                android:id="@+id/tvType"
+                style="@style/TextSubHeader"
+                android:text="@{@string/generic_type(event.type)}" />
+
+            <TextView
+                android:id="@+id/tvCreated"
+                style="@style/TextSubHeader"
+                android:textStyle="italic"
+                android:text="@{@string/generic_created_at(event.created_at)}" />
+
+            <TextView
+                android:id="@+id/tvActor"
+                style="@style/TextContent"
+                android:text="@{@string/generic_actor(event.actor.login)}" />
+
+            <TextView
+                android:id="@+id/tvRepo"
+                style="@style/TextContent"
+                android:text="@{@string/generic_repo(event.repo.name)}" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <data>
+
+        <variable
+            name="event"
+            type="com.eventgithubdemo.api.model.Event" />
+
+        <variable
+            name="selectListener"
+            type="com.eventgithubdemo.ui.EventSelectListener" />
+    </data>
+</layout>

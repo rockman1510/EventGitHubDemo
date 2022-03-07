@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main"
+    app:startDestination="@+id/navigation_list_event">
+
+    <fragment
+        android:id="@+id/navigation_list_event"
+        android:name="com.eventgithubdemo.ui.event.ListEventFragment"
+        android:label="@string/events"
+        tools:layout="@layout/fragment_list_event">
+        <action
+            android:id="@+id/go_to_detail"
+            app:destination="@id/navigation_detail_event" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_detail_event"
+        android:name="com.eventgithubdemo.ui.event.DetailEventFragment"
+        android:label="@string/event"
+        tools:layout="@layout/fragment_detail_event">
+        <argument
+            android:name="event"
+            app:argType="com.eventgithubdemo.api.model.Event" />
+    </fragment>
+
+</navigation>
