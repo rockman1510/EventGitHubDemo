@@ -51,10 +51,10 @@ ext {
     glideVer = '4.13.0'
     retrofitVer = "2.9.0"
     coroutinesVer = '1.6.0-native-mt'
-    hiltVer = '2.41'
+    hiltVer = '2.42'
     okHttpVer = "4.9.1"
     gsonVer = '2.9.0'
-    navigationVer = "2.4.1"
+    navigationVer = "2.5.3"
     swiperefreshlayoutVer = "1.1.0"
     roomVersion = "2.4.0"
     moshiVer = "1.13.0"

@@ -7,6 +7,7 @@ import com.eventgithubdemo.UnitTestUtils
 import com.eventgithubdemo.base.CoroutinesDispatcherProvider
 import com.eventgithubdemo.getOrAwaitValue
 import com.eventgithubdemo.repository.FakeListEventRepositoryImpl
+import com.eventgithubdemo.ui.domain.FakeGetListEventUseCase
 import com.eventgithubdemo.ui.event.mvi.EventsState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -40,10 +41,10 @@ class ListEventViewModelTest {
     @Test
     fun `processIntent - 5`() = runBlocking {
         val handler = mock(Handler::class.java)
+        val fakeGetListEventUseCase = FakeGetListEventUseCase(FakeListEventRepositoryImpl(
+            UnitTestUtils.generateListEvent(5), dispatcherProvider), dispatcherProvider)
         listEventViewModel = ListEventViewModel(
-            FakeListEventRepositoryImpl(
-                UnitTestUtils.generateListEvent(5), dispatcherProvider
-            ), dispatcherProvider, handler
+                fakeGetListEventUseCase, dispatcherProvider, handler
         )
         val state = listEventViewModel.getState().getOrAwaitValue()
         assert(state is EventsState.OnSuccess)
@@ -53,10 +54,10 @@ class ListEventViewModelTest {
     @Test
     fun `processIntent - 20`() = runBlocking {
         val handler = mock(Handler::class.java)
+        val fakeGetListEventUseCase = FakeGetListEventUseCase(FakeListEventRepositoryImpl(
+            UnitTestUtils.generateListEvent(20), dispatcherProvider), dispatcherProvider)
         listEventViewModel = ListEventViewModel(
-            FakeListEventRepositoryImpl(
-                UnitTestUtils.generateListEvent(20), dispatcherProvider
-            ), dispatcherProvider, handler
+            fakeGetListEventUseCase, dispatcherProvider, handler
         )
         val state = listEventViewModel.getState().getOrAwaitValue()
         assert(state is EventsState.OnSuccess)
@@ -66,10 +67,10 @@ class ListEventViewModelTest {
     @Test
     fun `processIntent - 50`() = runBlocking {
         val handler = mock(Handler::class.java)
+        val fakeGetListEventUseCase = FakeGetListEventUseCase(FakeListEventRepositoryImpl(
+            UnitTestUtils.generateListEvent(50), dispatcherProvider), dispatcherProvider)
         listEventViewModel = ListEventViewModel(
-            FakeListEventRepositoryImpl(
-                UnitTestUtils.generateListEvent(50), dispatcherProvider
-            ), dispatcherProvider, handler
+            fakeGetListEventUseCase, dispatcherProvider, handler
         )
         val state = listEventViewModel.getState().getOrAwaitValue()
         assert(state is EventsState.OnSuccess)

@@ -1,6 +1,7 @@
 package com.eventgithubdemo.ui.event
 
 import android.os.Handler
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.eventgithubdemo.api.model.Event
@@ -8,16 +9,17 @@ import com.eventgithubdemo.api.request.EventsQueryBuilder
 import com.eventgithubdemo.base.CoroutinesDispatcherProvider
 import com.eventgithubdemo.base.mvi.BaseViewModel
 import com.eventgithubdemo.constant.Constants
-import com.eventgithubdemo.repository.ListEventRepository
+import com.eventgithubdemo.ui.event.domain.GetListEventUseCase
 import com.eventgithubdemo.ui.event.mvi.EventsIntent
 import com.eventgithubdemo.ui.event.mvi.EventsState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ListEventViewModel @Inject constructor(
-    private val listEventRepository: ListEventRepository,
+    private val getListEventUseCase: GetListEventUseCase,
     private val dispatcher: CoroutinesDispatcherProvider,
     private val handler: Handler
 ) : BaseViewModel<EventsIntent, EventsState>() {
@@ -47,11 +49,19 @@ class ListEventViewModel @Inject constructor(
             try {
                 var newData = arrayListOf<Event>()
                 val eventsQueryBuilder = EventsQueryBuilder().setPerPage(intent.perPage)
-                listEventRepository.getEventsApi(eventsQueryBuilder).collect {
+                getListEventUseCase.getEventsData(eventsQueryBuilder).collect {
                     newData = it
                     if (!eventList.containsAll(newData)) {
                         eventList.addAll(0, newData)
                     }
+                }
+//                var message = ""
+//                listOf(launch { newData = getListEventUseCase.loadingEventsData(eventsQueryBuilder, ::onError) },
+//                launch { message = getListEventUseCase.loading() }).joinAll()
+//                Log.d("HuyLV", "loadData: $message")
+//                val newData = getListEventUseCase.invoke(eventsQueryBuilder, ::onError)
+                if(!eventList.containsAll(newData)){
+                    eventList.addAll(0, newData)
                 }
                 if (newData.isNullOrEmpty()) {
                     onError("No Data!")
@@ -76,5 +86,6 @@ class ListEventViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         handler.removeCallbacks(runnableTask)
+        getListEventUseCase.onCancel()
     }
 }
