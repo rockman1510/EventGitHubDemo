@@ -20,7 +20,6 @@ class EventAdapter(
             LayoutInflater.from(parent.context), R.layout.layout_event_items, parent, false
         )
         return ViewHolder(binding)
-
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

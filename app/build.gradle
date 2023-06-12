@@ -75,7 +75,7 @@ dependencies {
     androidTestImplementation "android.arch.core:core-testing:1.1.1"
     testImplementation "androidx.test:core:1.4.0"
 
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVer"
+    implementation "androidx.lifecycle:lifecycle-live-ktx:$lifecycleVer"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVer"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVer"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleExtensionVer"

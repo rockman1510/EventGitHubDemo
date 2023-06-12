@@ -55,14 +55,62 @@ class ListEventViewModel @Inject constructor(
                         eventList.addAll(0, newData)
                     }
                 }
+
 //                var message = ""
-//                listOf(launch { newData = getListEventUseCase.loadingEventsData(eventsQueryBuilder, ::onError) },
-//                launch { message = getListEventUseCase.loading() }).joinAll()
+                listOf(
+                    launch {
+                        getListEventUseCase.getEventsData(eventsQueryBuilder).collect {
+                            newData = it
+                            if (!eventList.containsAll(newData)) {
+                                eventList.addAll(0, newData)
+                            }
+                            Log.d("HuyLV", "1")
+                        }
+                    },
+                    launch {
+                        getListEventUseCase.getEventsData(eventsQueryBuilder).collect {
+                            newData = it
+                            if (!eventList.containsAll(newData)) {
+                                eventList.addAll(0, newData)
+                            }
+                            Log.d("HuyLV", "2")
+                        }
+                    },
+                    launch {
+                        getListEventUseCase.getEventsData(eventsQueryBuilder).collect {
+                            newData = it
+                            if (!eventList.containsAll(newData)) {
+                                eventList.addAll(0, newData)
+                            }
+                            Log.d("HuyLV", "3")
+                        }
+                    },
+                    launch {
+                        getListEventUseCase.getEventsData(eventsQueryBuilder).collect {
+                            newData = it
+                            if (!eventList.containsAll(newData)) {
+                                eventList.addAll(0, newData)
+                            }
+                            Log.d("HuyLV", "4")
+                        }
+                    },
+                    launch {
+                        getListEventUseCase.getEventsData(eventsQueryBuilder).collect {
+                            newData = it
+                            if (!eventList.containsAll(newData)) {
+                                eventList.addAll(0, newData)
+                            }
+                            Log.d("HuyLV", "5")
+                        }
+                    },
+//                    launch { message = getListEventUseCase.loading() }
+                ).joinAll()
+//                message = getListEventUseCase.loading()
 //                Log.d("HuyLV", "loadData: $message")
 //                val newData = getListEventUseCase.invoke(eventsQueryBuilder, ::onError)
-                if(!eventList.containsAll(newData)){
-                    eventList.addAll(0, newData)
-                }
+//                if (!eventList.containsAll(newData)) {
+//                    eventList.addAll(0, newData)
+//                }
                 if (newData.isNullOrEmpty()) {
                     onError("No Data!")
                 } else {
